@@ -1,0 +1,39 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated 15/04/2018 11:15:38 by Hibernate Tools 4.3.1 -->
+<hibernate-mapping>
+    <class name="sys.model.Tbcliente" table="tbcliente" catalog="dbhotel" optimistic-lock="version">
+        <id name="idCliente" type="java.lang.Integer">
+            <column name="idCliente" />
+            <generator class="identity" />
+        </id>
+        <many-to-one name="tbdepartamento" class="sys.model.Tbdepartamento" fetch="select">
+            <column name="idDepartamento" not-null="true" />
+        </many-to-one>
+        <many-to-one name="tbprovincia" class="sys.model.Tbprovincia" fetch="select">
+            <column name="idProvincia" not-null="true" />
+        </many-to-one>
+        <many-to-one name="tbusuario" class="sys.model.Tbusuario" fetch="select">
+            <column name="idUsuario" not-null="true" />
+        </many-to-one>
+        <property name="nombreCliente" type="string">
+            <column name="nombreCliente" length="50" not-null="true" />
+        </property>
+        <property name="apellidoCliente" type="string">
+            <column name="apellidoCliente" length="50" not-null="true" />
+        </property>
+        <property name="direccionCliente" type="string">
+            <column name="direccionCliente" length="150" not-null="true" />
+        </property>
+        <property name="telefonoCliente" type="string">
+            <column name="telefonoCliente" length="10" />
+        </property>
+        <set name="tbreservas" table="tbreserva" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="cliente" not-null="true" />
+            </key>
+            <one-to-many class="sys.model.Tbreserva" />
+        </set>
+    </class>
+</hibernate-mapping>
