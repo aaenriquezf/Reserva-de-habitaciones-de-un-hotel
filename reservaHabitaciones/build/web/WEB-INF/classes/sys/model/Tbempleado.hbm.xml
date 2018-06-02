@@ -1,0 +1,33 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated 15/04/2018 11:15:38 by Hibernate Tools 4.3.1 -->
+<hibernate-mapping>
+    <class name="sys.model.Tbempleado" table="tbempleado" catalog="dbhotel" optimistic-lock="version">
+        <id name="idEmpleado" type="java.lang.Integer">
+            <column name="idEmpleado" />
+            <generator class="identity" />
+        </id>
+        <many-to-one name="tbdepartamento" class="sys.model.Tbdepartamento" fetch="select">
+            <column name="idDepartamento" not-null="true" />
+        </many-to-one>
+        <many-to-one name="tbprovincia" class="sys.model.Tbprovincia" fetch="select">
+            <column name="idProvincia" not-null="true" />
+        </many-to-one>
+        <many-to-one name="tbusuario" class="sys.model.Tbusuario" fetch="select">
+            <column name="Usuario" not-null="true" />
+        </many-to-one>
+        <property name="nombreEmpleado" type="string">
+            <column name="nombreEmpleado" length="50" not-null="true" />
+        </property>
+        <property name="apellidoEmpleado" type="string">
+            <column name="apellidoEmpleado" length="50" not-null="true" />
+        </property>
+        <property name="direccionEmpleado" type="string">
+            <column name="direccionEmpleado" length="150" not-null="true" />
+        </property>
+        <property name="telefonoEmpleado" type="string">
+            <column name="telefonoEmpleado" length="10" />
+        </property>
+    </class>
+</hibernate-mapping>
