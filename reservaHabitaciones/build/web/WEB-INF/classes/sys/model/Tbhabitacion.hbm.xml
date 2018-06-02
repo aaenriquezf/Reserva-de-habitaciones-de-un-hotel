@@ -1,0 +1,33 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated 15/04/2018 11:15:38 by Hibernate Tools 4.3.1 -->
+<hibernate-mapping>
+    <class name="sys.model.Tbhabitacion" table="tbhabitacion" catalog="dbhotel" optimistic-lock="version">
+        <id name="idHabitacion" type="java.lang.Integer">
+            <column name="idHabitacion" />
+            <generator class="identity" />
+        </id>
+        <many-to-one name="tbestado" class="sys.model.Tbestado" fetch="select">
+            <column name="idEstado" not-null="true" />
+        </many-to-one>
+        <many-to-one name="tbhotel" class="sys.model.Tbhotel" fetch="select">
+            <column name="idHotel" not-null="true" />
+        </many-to-one>
+        <property name="nombreHabitacion" type="string">
+            <column name="nombreHabitacion" length="25" not-null="true" />
+        </property>
+        <property name="capacidadHabitacion" type="int">
+            <column name="capacidadHabitacion" not-null="true" />
+        </property>
+        <property name="precioHabitacion" type="float">
+            <column name="precioHabitacion" precision="12" scale="0" not-null="true" />
+        </property>
+        <set name="tbreservas" table="tbreserva" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="habitacion" not-null="true" />
+            </key>
+            <one-to-many class="sys.model.Tbreserva" />
+        </set>
+    </class>
+</hibernate-mapping>
