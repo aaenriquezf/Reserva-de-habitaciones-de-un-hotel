@@ -1,0 +1,33 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated 15/04/2018 11:15:38 by Hibernate Tools 4.3.1 -->
+<hibernate-mapping>
+    <class name="sys.model.Tbprovincia" table="tbprovincia" catalog="dbhotel" optimistic-lock="version">
+        <id name="idProvincia" type="java.lang.Integer">
+            <column name="idProvincia" />
+            <generator class="identity" />
+        </id>
+        <property name="nombreProvincia" type="string">
+            <column name="nombreProvincia" length="50" not-null="true" />
+        </property>
+        <set name="tbempleados" table="tbempleado" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="idProvincia" not-null="true" />
+            </key>
+            <one-to-many class="sys.model.Tbempleado" />
+        </set>
+        <set name="tbdepartamentos" table="tbdepartamento" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="idProvincia" not-null="true" />
+            </key>
+            <one-to-many class="sys.model.Tbdepartamento" />
+        </set>
+        <set name="tbclientes" table="tbcliente" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="idProvincia" not-null="true" />
+            </key>
+            <one-to-many class="sys.model.Tbcliente" />
+        </set>
+    </class>
+</hibernate-mapping>
