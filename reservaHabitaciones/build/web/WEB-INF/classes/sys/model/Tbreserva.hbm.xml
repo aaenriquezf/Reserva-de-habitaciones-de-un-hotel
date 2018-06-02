@@ -1,0 +1,27 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated 15/04/2018 11:15:38 by Hibernate Tools 4.3.1 -->
+<hibernate-mapping>
+    <class name="sys.model.Tbreserva" table="tbreserva" catalog="dbhotel" optimistic-lock="version">
+        <id name="idReserva" type="java.lang.Integer">
+            <column name="idReserva" />
+            <generator class="identity" />
+        </id>
+        <many-to-one name="tbcliente" class="sys.model.Tbcliente" fetch="select">
+            <column name="cliente" not-null="true" />
+        </many-to-one>
+        <many-to-one name="tbhabitacion" class="sys.model.Tbhabitacion" fetch="select">
+            <column name="habitacion" not-null="true" />
+        </many-to-one>
+        <property name="numeroReserva" type="int">
+            <column name="numeroReserva" not-null="true" />
+        </property>
+        <property name="fechaIngreso" type="date">
+            <column name="fechaIngreso" length="10" not-null="true" />
+        </property>
+        <property name="fechaSalida" type="date">
+            <column name="fechaSalida" length="10" not-null="true" />
+        </property>
+    </class>
+</hibernate-mapping>
