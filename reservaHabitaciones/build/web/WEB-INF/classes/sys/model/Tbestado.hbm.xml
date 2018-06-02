@@ -1,0 +1,21 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated 15/04/2018 11:15:38 by Hibernate Tools 4.3.1 -->
+<hibernate-mapping>
+    <class name="sys.model.Tbestado" table="tbestado" catalog="dbhotel" optimistic-lock="version">
+        <id name="idEstado" type="java.lang.Integer">
+            <column name="idEstado" />
+            <generator class="identity" />
+        </id>
+        <property name="nombreEstado" type="string">
+            <column name="nombreEstado" length="25" not-null="true" />
+        </property>
+        <set name="tbhabitacions" table="tbhabitacion" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="idEstado" not-null="true" />
+            </key>
+            <one-to-many class="sys.model.Tbhabitacion" />
+        </set>
+    </class>
+</hibernate-mapping>
