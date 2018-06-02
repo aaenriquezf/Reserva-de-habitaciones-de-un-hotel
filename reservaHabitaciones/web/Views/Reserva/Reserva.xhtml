@@ -1,0 +1,171 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:h="http://xmlns.jcp.org/jsf/html">
+
+    <body>
+
+        <ui:composition template="./../../plantilla/plantilla.xhtml">
+
+            <ui:define name="content">
+
+                <h1>Reserva</h1>
+                <div id="top">
+
+
+                    <p:growl id="mensajeGeneral" autoUpdate="true" showDetail="true" life="30000"/>
+                </div>
+                <div>
+                    <h:form>
+                        <p:commandButton value="Nueva reserva" actionListener="#{reservasBean.prepararNuevaReserva}" 
+                                         oncomplete="PF('digNuevo').show();" update=":formInsertar" style="font-size: 14px;"/>
+                    </h:form>
+                </div>
+                <p:dialog id="digN" header="Nuevo registro" widgetVar="digNuevo" showEffect="explode" hideEffect="explode"
+                          modal="true">
+                    <h:form id="formInsertar">
+                <p:panelGrid columns="2" style="margin: 0 auto">
+
+                            <p:outputLabel value="Cliente:"/>
+                            <h:selectOneMenu id= "provincia" value="#{reservasBean.cliente.idCliente}"
+                                             required="true" requiredMessage="Seleccione un cliente">
+                                <f:selectItem itemLabel="--Seleccione--"/>
+                                <f:selectItems value="#{reservasBean.listaClientes}"/>
+                            </h:selectOneMenu>
+                            
+   
+                                             
+                            <p:outputLabel value="Habitación:"/>
+                            <h:selectOneMenu id= "habitacion" value="#{reservasBean.habitacion.idHabitacion}"
+                                             required="true" requiredMessage="Seleccione un cliente">
+                                <f:selectItem itemLabel="--Seleccione--"/>
+                                <f:selectItems value="#{reservasBean.listaHabitaciones}"/>
+                                
+                            </h:selectOneMenu>
+                  
+                              <p:outputLabel value="Fecha Ingreso:" />
+                              <p:calendar id="fechaIngreso" value="#{reservasBean.reserva.fechaIngreso}" />
+                                 
+                              
+                               <p:outputLabel value="Fecha Salida:" />
+                               <p:calendar id="fechaSalida" value="#{reservasBean.reserva.fechaSalida}" />
+
+                            <h:panelGroup style="display:block; text-align: center">
+                                <p:commandButton value="Guardar" style="margin: 0 auto"
+                                                 actionListener="#{reservasBean.nuevaReserva()}"
+                                                 oncomplete="PF('digNuevo').hide();"
+                                                 update=":formMostrarReservas"
+                                                 />
+                            </h:panelGroup>
+
+                            <h:panelGroup style="display:block; text-align: center">
+                                <p:commandButton value="Cancelar" action="#{clienteBean.cancelar()}" oncomplete="PF('digNuevo').hide();" 
+                                                 />
+                            </h:panelGroup>
+
+                               
+                            
+                        </p:panelGrid>
+                           </h:form>
+                    
+                    
+                </p:dialog>
+                <p:separator/>
+
+
+                <h:form id="formMostrarReservas" >
+                    <p:dataTable id="tablaMostrarReservas" var="emp" value ="#{reservasBean.listar}"
+                                 emptyMessage="No hay datos de reservas" style="font-size: 12px;">
+
+                        <p:column headerText="Habitacion">
+                            <h:outputText value="#{emp.tbhabitacion.nombreHabitacion}"/>
+                        </p:column>
+                        <p:column headerText="Cliente">
+                            <h:outputText value="#{emp.tbcliente.nombreCliente}"/>
+                        </p:column>
+                        <p:column headerText="Fecha Ingreso">
+                            <h:outputText value="#{emp.fechaIngreso}"/>
+                        </p:column>
+
+                        <p:column headerText="Fecha Salida">
+                            <h:outputText value="#{emp.fechaSalida}"/>
+                        </p:column>
+                        
+                        <p:column headerText="     ">
+                            <p:commandButton value="Modificar" oncomplete="PF('digModificar').show();"
+                                             update=":formModificar" >
+                                <f:setPropertyActionListener target="#{reservasBean.reserva}" value="#{emp}"/>
+                            </p:commandButton>
+                        </p:column>
+
+                       <p:column headerText="     ">
+                            <p:commandButton value="Eliminar" oncomplete="PF('digEliminar').show();"
+                                             update=":formEliminar" >
+                                <f:setPropertyActionListener target="#{reservasBean.reserva}" value="#{emp}"/>
+                            </p:commandButton>
+                        </p:column>
+
+
+                    </p:dataTable>
+                </h:form>
+                
+                <p:dialog id="dig" header="Modificar Datos Reserva" widgetVar="digModificar"
+                          showEffect="explode" hideEffect="explode" modal="true">
+                    <h:form id="formModificar" style="font-size: 14px;">
+                        <p:panelGrid columns="2" style="margin: 0 auto">
+
+                            
+
+                             <p:outputLabel value="Cliente:"/>
+                             <h:selectOneMenu id= "cliente1" value="#{reservasBean.reserva.tbcliente.idCliente}"
+                                             required="true" requiredMessage="Seleccione un cliente">
+                                <f:selectItem itemLabel="--Seleccione--"/>
+                                <f:selectItems value="#{reservasBean.listaClientes}"/>
+                            </h:selectOneMenu>
+                            
+                            <p:outputLabel value="Habitacion"/>
+                            <h:selectOneMenu id= "habitacion1" value="#{reservasBean.reserva.tbhabitacion.idHabitacion}"
+                                             required="true" requiredMessage="Seleccione una habitacion">
+                                <f:selectItem itemLabel="--Seleccione--"/>
+                                <f:selectItems value="#{reservasBean.listaHabitaciones}"/>
+                            </h:selectOneMenu>
+                            <p:outputLabel value="Fecha Ingreso:" />
+                            <p:calendar id="fechaIngreso1" value="#{reservasBean.reserva.fechaIngreso}" />
+
+
+                             <p:outputLabel value="Fecha Salida:" />
+                             <p:calendar id="fechaSalida1" value="#{reservasBean.reserva.fechaSalida}" />
+                                             
+                          
+                            <h:panelGroup style="display:block; text-align: center">
+                                <p:commandButton value="Guardar cambios" style="margin: 0 auto" actionListener="#{reservasBean.modificarReserva()}"
+                                                 update=":formMostrarReservas" onclick="PF('digModificar').hide();"/>
+                            </h:panelGroup>
+
+                            <h:panelGroup style="display:block; text-align: center">
+                                <p:commandButton value="Cancelar" onclick="PF('digModificar').hide();" 
+                                                 immediate="true"/>
+                            </h:panelGroup>
+                        </p:panelGrid>
+                    </h:form>
+                </p:dialog>
+
+                 <p:dialog id="dig2" header="Eliminar Reserva" widgetVar="digEliminar"
+                          showEffect="explode" hideEffect="explode" modal="true">
+                    <h:form id="formEliminar" style="font-size: 14px;">
+                        <h:outputText value="Desea eliminar este registro? "/>
+                        <p:commandButton value="Si" actionListener="#{reservasBean.eliminarReserva()}"
+                                         update=":formMostrarReservas" oncomplete="PF('digEliminar').hide();"/>
+                        <p:commandButton value="No" onclick="PF('digEliminar').hide();" />
+                    </h:form>
+                </p:dialog>
+                
+            </ui:define>
+            
+        </ui:composition>
+
+    </body>
+</html>
