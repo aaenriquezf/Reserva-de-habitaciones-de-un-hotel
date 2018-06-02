@@ -1,0 +1,67 @@
+<?xml version='1.0' encoding='UTF-8' ?> 
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:h="http://xmlns.jcp.org/jsf/html">
+    <link href="../resources/css/cssLayout.css" rel="stylesheet" type="text/css"/>
+    <link href="../resources/css/default.css" rel="stylesheet" type="text/css"/>
+    <h:head>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+        <h:outputStylesheet name="/resources/css/default.css"/>
+        <link href="../resources/css/default.css" rel="stylesheet" type="text/css"/>
+        <h:outputStylesheet name="/resources/css/cssLayout.css"/>
+        <link href="../resources/css/cssLayout.css" rel="stylesheet" type="text/css"/>
+        <title>Reserva hotel</title>
+    </h:head>
+   
+
+    <h:body>
+        <link href="../resources/css/cssLayout.css" rel="stylesheet" type="text/css"/>
+        <link href="../resources/css/default.css" rel="stylesheet" type="text/css"/>
+        <div id="top">
+            <ui:insert name="top">
+              
+                <h1>Sistema de reserva de habitaciones</h1>
+               <div id="menuPrincipal">
+                <h:form>  
+                    
+                    <p:menubar>
+                        <p:submenu label="Inicio" icon="ui-icon-document">
+                            <p:menuitem value="Páginia Inicio" url="/faces/Views/Bienvenido.xhtml" />
+                            <p:separator />
+                            <p:menuitem value="Salir" action="#{loginBean.cerrarSesion()}" />
+                           
+                        </p:submenu>
+
+                        <p:submenu label="Cliente" icon="ui-icon-pencil">
+                            <p:menuitem value="Administrar Clientes" outcome="/Views/Cliente/Cliente" icon="ui-icon-arrowreturnthick-1-w" />                            
+                        </p:submenu>
+                        <p:submenu label="Empleado" icon="ui-icon-help">
+                            <p:menuitem value="Administrar Empleados" outcome="/Views/Empleado/Empleado" />
+                        </p:submenu>
+                        <p:submenu label="Habitaciones" icon="ui-icon-help">
+                            <p:menuitem value="Administrar Habitaciones" outcome="/Views/Habitaciones/Habitaciones" />
+                        </p:submenu>
+                        <p:submenu label="Reserva" icon="ui-icon-help">
+                            <p:menuitem value="Reserva habitaciones" outcome="/Views/Reserva/Reserva" />
+                            <p:menuitem value="Reserva habitaciones Clientes" outcome="/Views/Reserva/ReservaCliente" />
+                        </p:submenu>
+                    </p:menubar>
+                </h:form>
+               </div>
+            </ui:insert>
+        </div>
+
+        <div id="content" class="center_content">
+            <ui:insert name="content">Content</ui:insert>
+        </div>
+
+        <div id="bottom">
+            <ui:insert name="bottom">&copy; Amanda Enríquez 2018</ui:insert>
+        </div>
+
+    </h:body>
+
+</html>
